@@ -5,5 +5,11 @@
     $usuario = 'root';
     $senha='';
 
-    $conexao = mysqli_connect($servidor,$usuario,$senha,$banco);
+    try{
+        $conexao = mysqli_connect($servidor,$usuario,$senha,$banco);
+    }
+    catch(Exception $e){
+        echo $e;
+        exit();
+    }
 ?>
