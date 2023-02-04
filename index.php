@@ -32,6 +32,21 @@
                 </div>
             </div>
         </form>
+        <p></p>
+        <?php
+
+            include "conexao.php";
+    
+            $sqlBusca = "select * from t_tarefas";
+
+            $todasAsTarefas = mysqli_query($conexao, $sqlBusca);
+            
+            while($umaTarefa = mysqli_fetch_assoc($todasAsTarefas)){
+                echo $umaTarefa['id']." - ".$umaTarefa['descricao']."<br>";
+            }
+
+            mysqli_close($conexao);
+        ?>
     </main>
 </body>
 </html>

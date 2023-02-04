@@ -1,13 +1,7 @@
 <?php
     $tarefa = $_POST["tarefa"];
     
-    //conexao banco de dados
-    $servidor = '127.0.0.1';
-    $banco = 'bd_tarefas';
-    $usuario = 'root';
-    $senha='';
-
-    $conexao = mysqli_connect($servidor,$usuario,$senha,$banco);
+    include "conexao.php";
     
     $sqlGravar = "Insert into t_tarefas(descricao) values('$tarefa')";
 
