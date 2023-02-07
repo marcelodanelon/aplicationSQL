@@ -29,15 +29,16 @@
                                 $todasAsTarefas = mysqli_query($conexao, $sqlBusca);
                                 while ($umaTarefa = mysqli_fetch_assoc($todasAsTarefas)) {
                                 ?>
-                                    <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded fundo-cinza justify-content-between">                                        
-                                        <?php echo $umaTarefa['id']; ?>
-                                        <?php echo $umaTarefa['descricao']; ?>
-                                        <?php echo $umaTarefa['responsavel']; ?>
-                                        <span>
+                                    <div class="row list-group-item d-flex align-items-center border-0 mb-2 rounded fundo-cinza justify-content-between">                                        
+                                        <div class="col-4"><?php echo $umaTarefa['id']."-"; ?> 
+                                            <?php echo $umaTarefa['descricao']; ?>
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-center"><?php echo $umaTarefa['responsavel']; ?></div>
+                                        <div class="col-4 d-flex justify-content-end">
                                             <a class='btn btn-warning me-1' href="alterar-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-pencil-square"> Alterar</i></a>
-                                            <a class='btn btn-danger me-3' href="excluir-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-trash3"></i> Excluir</a>
-                                        </span>
-                                    </li>
+                                            <a class='btn btn-danger' href="excluir-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-trash3"></i> Excluir</a>
+                                        </div>
+                                </div>
                                 <?php
                                 }
                                 mysqli_close($conexao);
