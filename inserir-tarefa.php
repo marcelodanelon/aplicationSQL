@@ -1,10 +1,11 @@
 <?php
     $tarefa = $_POST["tarefa"];
     $responsavel = $_POST["responsavel"];
+    $situacao = $_POST["situacao"];
     
     include "conexao.php";
     
-    $sqlGravar = "Insert into t_tarefas(descricao, responsavel) values('$tarefa', '$responsavel')";
+    $sqlGravar = "Insert into t_tarefas(descricao, responsavel,situacao) values('$tarefa', '$responsavel', '$situacao')";
 
     mysqli_query($conexao, $sqlGravar);
 

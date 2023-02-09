@@ -5,6 +5,11 @@
                                 <div class="form-outline flex-fill">
                                     <input type="text" id="form2" class="form-control" placeholder="Nova tarefa" name="tarefa">
                                     <input type="text" id="form2" class="form-control mt-1" placeholder="Responsável Tarefa" name="responsavel">
+                                    <select class="form-select mt-1" name="situacao" aria-label="Default select example">
+                                        <option value="Planejado">Planejado</option>
+                                        <option value="Em Andamento">Em Andamento</option>
+                                        <option value="Concluído">Concluído</option>
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-success ms-2 text-light fw-bold"><i class="bi bi-download"></i> ADD</button>
                             </form>
@@ -30,11 +35,15 @@
                                 while ($umaTarefa = mysqli_fetch_assoc($todasAsTarefas)) {
                                 ?>
                                     <div class="row list-group-item d-flex align-items-center border-0 mb-2 rounded fundo-cinza justify-content-between">                                        
-                                        <div class="col-4"><?php echo $umaTarefa['id']."-"; ?> 
+                                        <div class="col-3">
+                                            <?php echo $umaTarefa['id']."-"; ?> 
                                             <?php echo $umaTarefa['descricao']; ?>
                                         </div>
-                                        <div class="col-4 d-flex justify-content-center"><?php echo $umaTarefa['responsavel']; ?></div>
-                                        <div class="col-4 d-flex justify-content-end">
+                                        <div class="col-3 d-flex justify-content-center">
+                                            <?php echo $umaTarefa['situacao']; ?>
+                                        </div>
+                                        <div class="col-3 d-flex justify-content-center"><?php echo $umaTarefa['responsavel']; ?></div>
+                                        <div class="col-3 d-flex justify-content-end">
                                             <a class='btn btn-warning me-1' href="alterar-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-pencil-square"> Alterar</i></a>
                                             <a class='btn btn-danger' href="excluir-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-trash3"></i> Excluir</a>
                                         </div>
