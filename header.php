@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <section class="vh-700 fundo">
+    <section class="vh-100 fundo">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-20">

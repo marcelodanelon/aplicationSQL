@@ -1,28 +1,22 @@
 <?php include_once "header.php"; ?>
                             <?php include "mensagens.php"; ?>
                             <!--inicio conteudo -->
-                            <form class="d-flex justify-content-center align-items-center mb-4" action="inserir-tarefa.php" method="post">
-                                <div class="form-outline flex-fill">
-                                    <input type="text" id="form2" class="form-control" placeholder="Nova tarefa" name="tarefa">
-                                    <input type="text" id="form2" class="form-control mt-1" placeholder="Responsável Tarefa" name="responsavel">
-                                    <select class="form-select mt-1" name="situacao" aria-label="Default select example">
-                                        <option value="Planejado">Planejado</option>
-                                        <option value="Em Andamento">Em Andamento</option>
-                                        <option value="Concluído">Concluído</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-success ms-2 text-light fw-bold"><i class="bi bi-download"></i> ADD</button>
+                            <form class="d-flex justify-content-center align-items-center mb-4" action="page-adicionar-tarefa.php" method="post">
+                                <button type="submit" class="btn btn-success ms-2 text-light fw-bold"><i class="bi bi-download"></i> Adicionar Tarefa</button>
                             </form>
 
                             <ul class="nav justify-content-center">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Todas</a>
+                                    <a class="nav-link active" aria-current="page" href="index.php?filtro=todas">Todas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Em execução</a>
+                                    <a class="nav-link" href="index.php?filtro=planejado">Planejados</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Concluídas</a>
+                                    <a class="nav-link" href="index.php?filtro=emAndamento">Em Andamento</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?filtro=concluido">Concluídas</a>
                                 </li>
                             </ul>
 
@@ -30,7 +24,16 @@
                             <ul class="list-group mb-0">
                                 <?php
                                 include "conexao.php";
-                                $sqlBusca = "select * from t_tarefas";
+                                $filtro = $_GET['filtro'] ?? "";
+                                if($filtro=='emAndamento'){
+                                    $sqlBusca = "select * from t_tarefas where situacao='Em Andamento'";
+                                }else if($filtro=='concluido'){
+                                    $sqlBusca = "select * from t_tarefas where situacao='Concluído'";
+                                }else if($filtro=='planejado'){
+                                    $sqlBusca = "select * from t_tarefas where situacao='Planejado'";
+                                }else{
+                                    $sqlBusca = "select * from t_tarefas";
+                                }
                                 $todasAsTarefas = mysqli_query($conexao, $sqlBusca);
                                 while ($umaTarefa = mysqli_fetch_assoc($todasAsTarefas)) {
                                 ?>
@@ -44,7 +47,7 @@
                                         </div>
                                         <div class="col-3 d-flex justify-content-center"><?php echo $umaTarefa['responsavel']; ?></div>
                                         <div class="col-3 d-flex justify-content-end">
-                                            <a class='btn btn-warning me-1' href="alterar-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-pencil-square"> Alterar</i></a>
+                                            <a class='btn btn-warning me-1' href="page-alterar-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-pencil-square"> Alterar</i></a>
                                             <a class='btn btn-danger' href="excluir-tarefa.php?id=<?php echo $umaTarefa['id']; ?>"><i class="bi bi-trash3"></i> Excluir</a>
                                         </div>
                                 </div>
